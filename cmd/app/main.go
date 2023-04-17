@@ -12,6 +12,9 @@ func main() {
 
 	config.Connect()
 
+	app.Get("/", func(ctx iris.Context) {
+		ctx.HTML("<h1>Welcome</h1>")
+	})
 	app.Get("/dogs", handlers.GetDogs)
 	app.Get("/dogs/{id}", handlers.GetDog)
 	app.Post("/dogs", handlers.AddDog)
