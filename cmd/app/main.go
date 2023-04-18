@@ -10,6 +10,10 @@ import (
 func main() {
 	app := iris.New()
 
+	ac := config.MakeAccessLog()
+	defer ac.Close()
+	app.UseRouter(ac.Handler)
+
 	config.Connect()
 
 	app.Get("/", func(ctx iris.Context) {
