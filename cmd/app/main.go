@@ -10,7 +10,7 @@ import (
 func main() {
 	app := iris.New()
 
-	ac := config.MakeAccessLog()
+	ac := config.Logger()
 	defer ac.Close()
 	app.UseRouter(ac.Handler)
 

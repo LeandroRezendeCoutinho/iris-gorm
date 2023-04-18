@@ -7,12 +7,12 @@ import (
 	"github.com/kataras/iris/v12/middleware/accesslog"
 )
 
-func MakeAccessLog() *accesslog.AccessLog {
+func Logger() *accesslog.AccessLog {
 	// Initialize a new access log middleware.
 	ac := accesslog.New(io.Writer(os.Stdout))
 
 	// Remove this line to disable logging to console:
-	ac.AddOutput(os.Stdout)
+	// ac.AddOutput(os.Stdout)
 
 	// The default configuration:
 	ac.Delim = '|'
@@ -23,20 +23,20 @@ func MakeAccessLog() *accesslog.AccessLog {
 	ac.BytesSentBody = true
 	ac.BytesReceived = false
 	ac.BytesSent = false
-	ac.BodyMinify = true
-	ac.RequestBody = true
+	ac.BodyMinify = false
+	ac.RequestBody = false
 	ac.ResponseBody = false
-	ac.KeepMultiLineError = true
+	ac.KeepMultiLineError = false
 	ac.PanicLog = accesslog.LogHandler
 
 	// Default line format if formatter is missing:
 	// Time|Latency|Code|Method|Path|IP|Path Params Query Fields|Bytes Received|Bytes Sent|Request|Response|
 	//
 	// Set Custom Formatter:
-	ac.SetFormatter(&accesslog.JSON{
-		Indent:    "  ",
-		HumanTime: true,
-	})
+	// ac.SetFormatter(&accesslog.JSON{
+	// 	Indent:    "  ",
+	// 	HumanTime: true,
+	// })
 	// ac.SetFormatter(&accesslog.CSV{})
 	// ac.SetFormatter(&accesslog.Template{Text: "{{.Code}}"})
 
